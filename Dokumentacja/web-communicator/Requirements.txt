@@ -1,0 +1,5 @@
+# How to run this project:
+	* To run the project you need node_modules
+	* Go to "web-communicator" directory
+	* Start project with "npm start" command
+
