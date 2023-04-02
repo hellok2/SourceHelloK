@@ -1,0 +1,27 @@
+
+c_User
+- id			int
+- userName		varchar
+- 
+
+c_Message
+- id			int
+- ownerId		int
+- conversationId	int
+- content 		varchar
+- sendTime		date
+- deliveryTime		date
+- readTime		date
+
+c_Conversations
+- id			int
+- userId		int
+- conversationIdsList	??
+
+c_Conversation 
+- id			int	
+- usersIdsList		??
+
+
+
+
