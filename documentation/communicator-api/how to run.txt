@@ -1,0 +1,6 @@
+To run project u need to clone repository and run "npm install" command in your local repository directory (in this case communicator-api).
+
+This project needs connection to database to work properly.
+	For now we use only local database.
+	> To create database please use commands from database file.
+
