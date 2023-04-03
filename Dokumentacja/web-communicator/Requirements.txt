@@ -1,5 +1,7 @@
 # How to run this project:
-	* To run the project you need node_modules
+	* To run the project you need node_modules: 
+		- so first clone repository after that you need to move to the cloned repository in local folder and
+	 	  run "nmp install" command
 	* Go to "web-communicator" directory
 	* Start project with "npm start" command
 

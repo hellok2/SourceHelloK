@@ -1,0 +1,109 @@
+
+c_users
+- id			
+- username		
+- password
+- created_at
+- profile_picture
+
+c_friends
+- id
+- user_id
+- friend_id
+
+c_messages
+- id			
+- sender_id		
+- conversation_id	
+- message 		
+- send_at		
+- delivered_at		
+- read_at		
+
+c_conversations
+- id			
+- name
+- created_by
+- created_at
+- group_conversation	
+
+c_participants
+- id
+- conversation_id
+- user_id
+	
+c_user_sessions
+- id
+- user_id
+- created_at
+- last_active_at
+
+
+
+
+
+
+## Polecenia SQL tworzące bazę danych
+
+
+CREATE DATABASE hellok_communicator;
+USE hellok_communicator;
+
+CREATE TABLE c_users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  profile_picture TEXT
+);
+
+CREATE TABLE c_user_sessions (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  last_active_at TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES c_users(id)
+);
+
+CREATE TABLE c_friends (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    friend_id INT,
+    CONSTRAINT fk_user
+        FOREIGN KEY (user_id)
+        REFERENCES c_users(id),
+    CONSTRAINT fk_friend
+        FOREIGN KEY (friend_id)
+        REFERENCES c_users(id)
+);
+
+CREATE TABLE c_conversations (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  created_by INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  group_conversation BOOLEAN NOT NULL DEFAULT FALSE,
+  FOREIGN KEY (created_by) REFERENCES c_users(id)
+);
+
+CREATE TABLE c_messages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  sender_id INT NOT NULL,
+  conversation_id INT NOT NULL,
+  message TEXT NOT NULL,
+  send_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  delivered_at TIMESTAMP,
+  read_at TIMESTAMP,
+  FOREIGN KEY (sender_id) REFERENCES c_users(id),
+  FOREIGN KEY (conversation_id) REFERENCES c_conversations(id)
+);
+
+CREATE TABLE c_participants (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  conversation_id INT NOT NULL,
+  user_id INT NOT NULL,
+  FOREIGN KEY (conversation_id) REFERENCES c_conversations(id),
+  FOREIGN KEY (user_id) REFERENCES c_users(id)
+);
+
+
